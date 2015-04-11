@@ -8,8 +8,8 @@ $(function() {
 		canvasWidth = baseCanvas.width,
 		canvasHeight = baseCanvas.height;
 
-	var canvas3 = document.getElementById("canvas3"),
-		c3 = canvas3.getContext("2d");
+	var merge = document.getElementById("merge"),
+		cMerge = merge.getContext("2d");
 
 	var outputCanvas = document.getElementById("output"),
 		cOutput = outputCanvas.getContext("2d");
@@ -48,10 +48,10 @@ $(function() {
 					brushPosY = yPos - topSpace;
 				// end of get brush position
 
-				c3.fillStyle = "rgba(255, 255, 255, 1)";
-				c3.beginPath();
-				c3.arc(brushPosX, brushPosY, 30, 0, 2 * Math.PI, false);
-				c3.fill();
+				c.fillStyle = "rgba(0, 255, 0, 1)";
+				c.beginPath();
+				c.arc(brushPosX, brushPosY, 30, 0, 2 * Math.PI, false);
+				c.fill();
 			},
 			mouseup: function() {
 				$this.off("mousemove");
@@ -97,9 +97,10 @@ $(function() {
 
   	function manip() {
 
-		c.drawImage(vid, 0, 0, 640, 360);
+		cMerge.drawImage(vid, 0, 0, 640, 360);
+		cMerge.drawImage(baseCanvas, 0, 0, 640, 360);
 
-		var image = c.getImageData(0, 0, canvasWidth, canvasHeight),
+		var image = cMerge.getImageData(0, 0, canvasWidth, canvasHeight),
 		imageData = image.data,
 		length = imageData.length;
 		for ( var i = 0; i < length; i += 4 ) {
@@ -108,19 +109,17 @@ $(function() {
 				b = imageData[i+2],
 				a = imageData[i+3]; 
 			
-			if (r > 10 && g > 10 && b > 10) {
+			if (r == 0 && g == 255 && b == 0) {
 				// imageData[i] = 0;
 	 	 		// imageData[i+1] = 0;
 				// imageData[i+2] = 0;
-	            imageData[i+3] = 100;
+	            imageData[i+3] = 0;
 			}
 		}
 
 		image.data = imageData;
 		// baseCanvas.style.display = "none";
-		// cOutput.putImageData(image, 0, 0, 0, 0, canvasWidth, canvasHeight);
-		cOutput.drawImage(baseCanvas, 0, 0, 640, 360);
-		cOutput.drawImage(canvas3, 0, 0, 640, 360);
+		cOutput.putImageData(image, 0, 0, 0, 0, canvasWidth, canvasHeight);
 	}
 	// vid.addEventListener("play", runAnalysis, false);
 
