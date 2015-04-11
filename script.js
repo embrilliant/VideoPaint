@@ -1,7 +1,8 @@
 $(function() {
 
 	var vid = document.getElementById("vid");
-	var img = document.getElementById("testimg");
+
+	var vid2 = document.getElementById("vid2");
 
 	var baseCanvas = document.getElementById("canvas"),
 		c = baseCanvas.getContext("2d"),
@@ -16,13 +17,17 @@ $(function() {
 
 	var timeOut;
 
-	cOutput.fillStyle = "rgba(0, 0, 0, 1)";
-	cOutput.fillRect(0, 0, canvasWidth, canvasHeight);
-	cOutput.font = "30px 'Comic Sans MS'";
-	cOutput.fillStyle = "#c6c6c6";
-	cOutput.fillText("Brush here :) ", 225, 150);
+	// cOutput.fillStyle = "rgba(0, 0, 0, 1)";
+	// cOutput.fillRect(0, 0, canvasWidth, canvasHeight);
+	// cOutput.font = "30px 'Comic Sans MS'";
+	// cOutput.fillStyle = "#c6c6c6";
+	// cOutput.fillText("Brush here :) ", 225, 150);
+	
+	vid.play();
+	startToLoop();
 
 	$(window).on("mousedown", function() {  
+		vid2.play();
 		vid.play();
 		startToLoop();
 		brush();
@@ -46,7 +51,7 @@ $(function() {
 					brushPosY = yPos - topSpace;
 				// end of get brush position
 
-				c.fillStyle = "rgba(66, 66, 66, 1)";
+				c.fillStyle = "rgba(0, 0, 0, 1)";
 				c.beginPath();
 				c.arc(brushPosX, brushPosY, 30, 0, 2 * Math.PI, false);
 				c.fill();
@@ -83,7 +88,7 @@ $(function() {
 				b = imageData[i+2],
 				a = imageData[i+3]; 
 			
-			if (r == 66 && g == 66 && b == 66) {
+			if (r == 0 && g == 0 && b == 0) {
 	            imageData[i+3] = 0;
 			}
 		}

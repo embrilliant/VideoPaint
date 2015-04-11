@@ -1,5 +1,7 @@
 html, body {
 	background-color: rgba(66, 66, 66, 1);
+/*	background-image: url("bg.jpg");
+	background-size: cover;*/
 	padding: 0;
 	margin: 0; 
 }
@@ -19,6 +21,10 @@ video {
 	display: none;
 }
 
+#vid2 {
+	display: block;
+}
+
 img {
 	display: none;
 }
@@ -34,4 +40,14 @@ canvas {
 
 #output {
 	/*display: none;*/
+}
+
+p {
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 40px;
+	font-family: "Comic Sans MS";
+	font-size: 1.2em;
+	color: white;
+	text-align: center; 
 }
