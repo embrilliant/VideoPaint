@@ -16,11 +16,20 @@ video {
 	position: absolute;
 	width: 640px;
 	height: 360px;
+	display: none;
+}
+
+img {
+	display: none;
 }
 
 canvas {
 	position: absolute;
 	z-index: 1;
+}
+
+#canvas {
+	/*display: none;*/
 }
 
 #output {
