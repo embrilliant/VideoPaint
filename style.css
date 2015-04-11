@@ -29,7 +29,7 @@ canvas {
 }
 
 #canvas {
-	/*display: none;*/
+	display: none;
 }
 
 #output {

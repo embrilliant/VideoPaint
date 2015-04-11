@@ -8,6 +8,9 @@ $(function() {
 		canvasWidth = baseCanvas.width,
 		canvasHeight = baseCanvas.height;
 
+	var canvas3 = document.getElementById("canvas3"),
+		c3 = canvas3.getContext("2d");
+
 	var outputCanvas = document.getElementById("output"),
 		cOutput = outputCanvas.getContext("2d");
 
@@ -22,29 +25,10 @@ $(function() {
 	$(window).on("mousedown", function() {  
 		vid.play();
 		runAnalysis();
+		brush();
 	});
 
-	//  $("window").on("click", function() {
-	// 	vid.play();
-	// 	brush();
-	// });
-	/* 
-	vid.play();
-	setInterval(function() {
-		c.drawImage(vid, 0, 0, 640, 360);
-		var image = c.getImageData(0, 0, canvasWidth, canvasHeight);
-		cOutput.putImageData(image, 0, 0, 0, 0, canvasWidth, canvasHeight);
-		manip();
-		brush();
-	}, 0);
-	*/
-	// function drawVideo() {
-	// 	c.drawImage(vid, 0, 0, 640, 360);
-	// }
-
 	var newColr = {r: 0, g: 0, b: 0, a: 0};
-
-	var image = c.getImageData(0, 0, canvasWidth, canvasHeight);
 
 	function brush(event) { 
 
@@ -64,12 +48,10 @@ $(function() {
 					brushPosY = yPos - topSpace;
 				// end of get brush position
 
-				c.fillStyle = "rgb(0, 0, 0)";
-				c.beginPath();
-				c.arc(brushPosX, brushPosY, 30, 0, 2 * Math.PI, false);
-				c.fill();
-
-				// manip();
+				c3.fillStyle = "rgba(255, 255, 255, 1)";
+				c3.beginPath();
+				c3.arc(brushPosX, brushPosY, 30, 0, 2 * Math.PI, false);
+				c3.fill();
 			},
 			mouseup: function() {
 				$this.off("mousemove");
@@ -77,7 +59,7 @@ $(function() {
 		});
 	}
 
-	function manip() {
+	/* function manip() {
 		c.drawImage(vid, 0, 0, 640, 360);
 		var image = c.getImageData(0, 0, canvasWidth, canvasHeight),
 		imageData = image.data,
@@ -99,7 +81,7 @@ $(function() {
 		image.data = imageData;
 		baseCanvas.style.display = "none";
 		cOutput.putImageData(image, 0, 0, 0, 0, canvasWidth, canvasHeight);
-	}
+	} */
 
 	function runAnalysis() {
 	    if (vid.paused || vid.ended) {
@@ -113,23 +95,33 @@ $(function() {
     	}
   	}
 
-  	function processFrame() {
-  		c.drawImage(vid, 0, 0, 640, 360);
-  		var frame = c.getImageData(0, 0, 640, 360);
-  		var length = frame.data.length;
-        for (var i = 0; i < length; i += 4) {
-        	var r = frame.data[i],
-            	g = frame.data[i+1],
-           		b = frame.data[i+2];
+  	function manip() {
 
-	        if (r > 0 && g > 0 && b > 0) {  
-	        	frame.data[i+3] = 10; 
-	        } 
-        }
+		c.drawImage(vid, 0, 0, 640, 360);
 
-    	cOutput.putImageData(frame, 0, 0);
-  	}
+		var image = c.getImageData(0, 0, canvasWidth, canvasHeight),
+		imageData = image.data,
+		length = imageData.length;
+		for ( var i = 0; i < length; i += 4 ) {
+			var r = imageData[i],
+				g = imageData[i+1],
+				b = imageData[i+2],
+				a = imageData[i+3]; 
+			
+			if (r > 10 && g > 10 && b > 10) {
+				// imageData[i] = 0;
+	 	 		// imageData[i+1] = 0;
+				// imageData[i+2] = 0;
+	            imageData[i+3] = 100;
+			}
+		}
 
+		image.data = imageData;
+		// baseCanvas.style.display = "none";
+		// cOutput.putImageData(image, 0, 0, 0, 0, canvasWidth, canvasHeight);
+		cOutput.drawImage(baseCanvas, 0, 0, 640, 360);
+		cOutput.drawImage(canvas3, 0, 0, 640, 360);
+	}
 	// vid.addEventListener("play", runAnalysis, false);
 
 
