@@ -14,21 +14,19 @@ $(function() {
 	var outputCanvas = document.getElementById("output"),
 		cOutput = outputCanvas.getContext("2d");
 
-	/* c.fillStyle = "rgba(66, 66, 66, 1)";
-	c.fillRect(0, 0, canvasWidth, canvasHeight);
-	c.font = "30px 'Comic Sans MS'";
-	c.fillStyle = "#c6c6c6";
-	c.fillText("Brush here :) ", 225, 150); */
-	
-	// c.drawImage(img, 0, 0, 640, 360);
+	var timeOut;
+
+	cOutput.fillStyle = "rgba(0, 0, 0, 1)";
+	cOutput.fillRect(0, 0, canvasWidth, canvasHeight);
+	cOutput.font = "30px 'Comic Sans MS'";
+	cOutput.fillStyle = "#c6c6c6";
+	cOutput.fillText("Brush here :) ", 225, 150);
 
 	$(window).on("mousedown", function() {  
 		vid.play();
-		runAnalysis();
+		startToLoop();
 		brush();
 	});
-
-	var newColr = {r: 0, g: 0, b: 0, a: 0};
 
 	function brush(event) { 
 
@@ -48,7 +46,7 @@ $(function() {
 					brushPosY = yPos - topSpace;
 				// end of get brush position
 
-				c.fillStyle = "rgba(0, 255, 0, 1)";
+				c.fillStyle = "rgba(66, 66, 66, 1)";
 				c.beginPath();
 				c.arc(brushPosX, brushPosY, 30, 0, 2 * Math.PI, false);
 				c.fill();
@@ -59,39 +57,15 @@ $(function() {
 		});
 	}
 
-	/* function manip() {
-		c.drawImage(vid, 0, 0, 640, 360);
-		var image = c.getImageData(0, 0, canvasWidth, canvasHeight),
-		imageData = image.data,
-		length = imageData.length;
-		for ( var i = 0; i < length; i += 4 ) {
-			var r = imageData[i],
-				g = imageData[i+1],
-				b = imageData[i+2],
-				a = imageData[i+3]; 
-			
-			if (r > 0 && g > 0 && b > 0) {
-				// imageData[i] = 0;
-	 	 		// imageData[i+1] = 0;
-				// imageData[i+2] = 0;
-	            imageData[i+3] = 100;
-			}
-		}
-
-		image.data = imageData;
-		baseCanvas.style.display = "none";
-		cOutput.putImageData(image, 0, 0, 0, 0, canvasWidth, canvasHeight);
-	} */
-
-	function runAnalysis() {
+	function startToLoop() {
 	    if (vid.paused || vid.ended) {
 	    	return;
 	    }
     	manip();
-    	if (requestAnimationFrame) {
-        	requestAnimationFrame(runAnalysis);
+    	if (requestAnimationFrame) { // "requestAnimationFrame" by Paul Irish http://www.paulirish.com/2011/requestanimationframe-for-smart-animating
+        	requestAnimationFrame(startToLoop);
         } else {
-    		setTimeout(runAnalysis, 0);
+    		timeOut = setTimeout(startToLoop, 0);
     	}
   	}
 
@@ -109,20 +83,17 @@ $(function() {
 				b = imageData[i+2],
 				a = imageData[i+3]; 
 			
-			if (r == 0 && g == 255 && b == 0) {
-				// imageData[i] = 0;
-	 	 		// imageData[i+1] = 0;
-				// imageData[i+2] = 0;
+			if (r == 66 && g == 66 && b == 66) {
 	            imageData[i+3] = 0;
 			}
 		}
 
 		image.data = imageData;
-		// baseCanvas.style.display = "none";
 		cOutput.putImageData(image, 0, 0, 0, 0, canvasWidth, canvasHeight);
 	}
-	// vid.addEventListener("play", runAnalysis, false);
 
-
+	vid.addEventListener("ended", function() {
+		clearTimeout(timeOut);
+	});
 
 });
