@@ -9,6 +9,6 @@ Brush on the video with your cursor to erase the video and then another video wi
 
 Made with html5 canvas.
 
-## View Online
+## Online Page
 
-[View online](http://digitaleverything.net/demos/brush/2/)
+[View this demo online](http://digitaleverything.net/demos/brush/2/)
