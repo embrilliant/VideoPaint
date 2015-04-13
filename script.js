@@ -17,12 +17,6 @@ $(function() {
 
 	var timeOut;
 
-	// cOutput.fillStyle = "rgba(0, 0, 0, 1)";
-	// cOutput.fillRect(0, 0, canvasWidth, canvasHeight);
-	// cOutput.font = "30px 'Comic Sans MS'";
-	// cOutput.fillStyle = "#c6c6c6";
-	// cOutput.fillText("Brush here :) ", 225, 150);
-	
 	vid.play();
 	startToLoop();
 
