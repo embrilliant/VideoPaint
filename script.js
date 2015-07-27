@@ -71,7 +71,7 @@ $(function() {
 				b = imageData[i+2];
 			
 			if (r == 0 && g == 0 && b == 0) {
-	            imageData[i+3] = 0;
+	       		imageData[i+3] = 0;
 			}
 		}
 
