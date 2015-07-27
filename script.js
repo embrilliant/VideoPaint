@@ -63,13 +63,12 @@ $(function() {
 		cMerge.drawImage(baseCanvas, 0, 0, 640, 360);
 
 		var image = cMerge.getImageData(0, 0, canvasWidth, canvasHeight),
-		imageData = image.data,
-		length = imageData.length;
+			imageData = image.data,
+			length = imageData.length;
 		for ( var i = 0; i < length; i += 4 ) {
 			var r = imageData[i],
 				g = imageData[i+1],
-				b = imageData[i+2],
-				a = imageData[i+3]; 
+				b = imageData[i+2];
 			
 			if (r == 0 && g == 0 && b == 0) {
 	            imageData[i+3] = 0;
