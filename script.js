@@ -16,13 +16,6 @@ $(function() {
 
 	var timeOut;
 
-	$(window).on("mousedown", function() {  
-		vid2.play();
-		vid.play();
-		startToLoop();
-		brush();
-	});
-
 	function brush(event) { 
 
 		var $this = $(this);
@@ -86,6 +79,13 @@ $(function() {
 		image.data = imageData;
 		cOutput.putImageData(image, 0, 0, 0, 0, canvasWidth, canvasHeight);
 	}
+
+	$(window).on("mousedown", function() {  
+		vid2.play();
+		vid.play();
+		startToLoop();
+		brush();
+	});
 
 	vid.play();
 	startToLoop();
