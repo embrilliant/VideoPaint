@@ -1,8 +1,7 @@
 $(function() {
 
-	var vid = document.getElementById("vid");
-
-	var vid2 = document.getElementById("vid2");
+	var vid = document.getElementById("vid"),
+		vid2 = document.getElementById("vid2");
 
 	var baseCanvas = document.getElementById("canvas"),
 		c = baseCanvas.getContext("2d"),
