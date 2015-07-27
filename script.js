@@ -17,9 +17,6 @@ $(function() {
 
 	var timeOut;
 
-	vid.play();
-	startToLoop();
-
 	$(window).on("mousedown", function() {  
 		vid2.play();
 		vid.play();
@@ -47,7 +44,7 @@ $(function() {
 
 				c.fillStyle = "rgba(0, 0, 0, 1)";
 				c.beginPath();
-				c.arc(brushPosX, brushPosY, 30, 0, 2 * Math.PI, false);
+				c.arc(brushPosX, brushPosY, 25, 0, 2 * Math.PI, false);
 				c.fill();
 			},
 			mouseup: function() {
@@ -61,7 +58,7 @@ $(function() {
 	    	return;
 	    }
     	manip();
-    	if (requestAnimationFrame) { // "requestAnimationFrame" by Paul Irish http://www.paulirish.com/2011/requestanimationframe-for-smart-animating
+    	if (requestAnimationFrame) { // "requestAnimationFrame" https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
         	requestAnimationFrame(startToLoop);
         } else {
     		timeOut = setTimeout(startToLoop, 0);
@@ -90,6 +87,9 @@ $(function() {
 		image.data = imageData;
 		cOutput.putImageData(image, 0, 0, 0, 0, canvasWidth, canvasHeight);
 	}
+
+	vid.play();
+	startToLoop();
 
 	vid.addEventListener("ended", function() {
 		clearTimeout(timeOut);
