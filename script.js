@@ -36,7 +36,7 @@ $(function() {
 
 				c.fillStyle = "rgba(0, 0, 0, 1)";
 				c.beginPath();
-				c.arc(brushPosX, brushPosY, 25, 0, 2 * Math.PI, false);
+				c.arc(brushPosX, brushPosY, 27, 0, 2 * Math.PI, false);
 				c.fill();
 			},
 			mouseup: function() {
@@ -44,18 +44,6 @@ $(function() {
 			}
 		});
 	}
-
-	function startToLoop() {
-	    if (vid.paused || vid.ended) {
-	    	return;
-	    }
-    	manip();
-    	if (requestAnimationFrame) { // "requestAnimationFrame" https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
-        	requestAnimationFrame(startToLoop);
-        } else {
-    		timeOut = setTimeout(startToLoop, 0);
-    	}
-  	}
 
   	function manip() {
 
@@ -78,6 +66,18 @@ $(function() {
 		image.data = imageData;
 		cOutput.putImageData(image, 0, 0, 0, 0, canvasWidth, canvasHeight);
 	}
+	
+	function startToLoop() {
+	    if (vid.paused || vid.ended) {
+	    	return;
+	    }
+    	manip();
+    	if (requestAnimationFrame) { // "requestAnimationFrame" https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+        	requestAnimationFrame(startToLoop);
+        } else {
+    		timeOut = setTimeout(startToLoop, 1000/60);
+    	}
+  	}
 
 	$(window).on("mousedown", function() {  
 		vid2.play();
